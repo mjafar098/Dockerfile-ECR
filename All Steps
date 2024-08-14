@@ -1,0 +1,79 @@
+Pushing the docker image to AWS - ECR
+
+About the Application:
+This is a basic web application is created using Js, and docker file. In this project we are going to use some of AWS services like amazon ECR, IAM Role for authorization and configuration of AWS CLI, through which I’m going to push the docker image to Amazon ECR.
+
+
+Overview of the steps:
+
+Step1: write the code of js and create a docker file 
+Step2: Download Amazon CLI to your system (if not available in your system)
+Step3: Login to AWS console and create an IAM User and give the permission of ECR
+Step4: Use the access key and configure the AWS CLI
+Step4: Search for ECR and create a new repository 
+Step5: Now, click on push commands, copy and paste the given commands to CLI prompt 
+
+Step2: Download Amazon CLI and Docker to your local machine (if not available in your system)
+
+Open any web browser and type AWS CLI or use the link “https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html”
+For direct download for windows click “https://awscli.amazonaws.com/AWSCLIV2.msi”
+Install the CLI in your system
+To verify the installation open cmd and type: aws --version
+The output will show-
+	aws-cli/2.17.29 Python/3.11.9 Windows/10 exe/AMD64
+
+ 
+Go to the Browser and download docker or you can directly download it from the link 
+  “https://www.docker.com/products/docker-desktop/”
+click on download for windows and click to install
+Verify the docker product after successful installation
+  docker –version
+
+ 
+Step3: Login to AWS console and create an IAM User and give the permission of ECR
+
+Open and Login to AWS console and search for IAM User
+Click on User and create a user
+Give the name, set the permissions and attach the policy
+
+  
+Click on Next and create User and create an access key
+
+
+Step4: Use the access key and configure the AWS CLI
+
+Open windows power shell and configure with following commands
+  aws configure
+insert the access key and secret key
+choose the region and output format
+
+
+After successful configuration, go to the services and search for ECR
+
+
+Step4: Search for ECR and create a new repository 
+
+Search for ECR, give the meaningful name and create a repository
+
+ 
+
+Step5: Now, click on push commands, copy and paste the given commands to CLI prompt
+
+Start the docker Engine
+Click on View Push Commands 
+Use the following steps to authenticate and push an image to your repository. 
+1.	Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
+  aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 474359690735.dkr.ecr.ap-south-1.amazonaws.com
+2.	Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your image is already built:
+  docker build -t js-app .
+3.	After the build completes, tag your image so you can push the image to this repository:
+  docker tag js-app:latest 474359690735.dkr.ecr.ap-south-1.amazonaws.com/js-app:latest
+
+
+4.	Run the following command to push this image to your newly created AWS repository:
+  docker push 474359690735.dkr.ecr.ap-south-1.amazonaws.com/js-app:latest
+
+ After successful pushing the image will show in Amazon ECR repository
+
+ 
+
